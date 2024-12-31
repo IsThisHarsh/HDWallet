@@ -11,4 +11,9 @@ export default defineConfig({
         'global': {},
         'Buffer': ['buffer', 'Buffer'],
     },
+    resolve: {
+        alias: {
+            buffer: 'buffer/',
+        },
+    },
 });
