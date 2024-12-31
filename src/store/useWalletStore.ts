@@ -41,7 +41,7 @@ export const useWalletStore = create<WalletState>()(
                         [chain]: state.accounts[chain].filter((acc) => acc.address !== address),
                     },
                 })),
-            loading: true,
+            loading: false,
             setLoading: (status: boolean) => set({loading: status}),
             resetStore: () =>
                 set(() => ({
