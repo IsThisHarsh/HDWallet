@@ -7,22 +7,40 @@ import {Eye, EyeOff} from 'lucide-react';
 export function DeriveWallet() {
     const navigate = useNavigate();
     const [mnemonic, setMnemonic] = useState('');
+    const [loading, setLoading] = useState(false);
     const [showMnemonic, setShowMnemonic] = useState(false);
     const [error, setError] = useState('');
     const setStoreMnemonic = useWalletStore((state) => state.setMnemonic);
+    const {resetStore, addAccount} = useWalletStore();
     const {darkMode} = useWalletStore();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
+        setLoading(true);
 
         try {
+            resetStore();
             const walletService = WalletService.getInstance();
+            const accounts = await walletService.initializeWallet();
+
+            Object.entries(accounts).forEach(([chain, chainAccounts]) => {
+                chainAccounts.forEach(account => {
+                    addAccount(chain, {
+                        address: account.address,
+                        balance: account.balance,
+                        index: account.index
+                    });
+                });
+            });
             walletService.setMnemonic(mnemonic);
             setStoreMnemonic(mnemonic);
             navigate('/wallet');
         } catch (err) {
             setError('Invalid mnemonic phrase. Please check and try again.');
+            setLoading(false);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -65,9 +83,10 @@ export function DeriveWallet() {
 
                 <button
                     type="submit"
-                    className="w-full py-2 px-4 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+                    disabled={loading}
+                    className="w-full py-2 px-4 bg-primary-600 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary-700 transition-colors"
                 >
-                    Import Wallet
+                    {loading ? 'Deriving...' : 'Import Wallet'}
                 </button>
             </form>
 

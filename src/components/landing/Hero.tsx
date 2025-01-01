@@ -22,7 +22,7 @@ export function Hero() {
                     </Link>
                     <Link
                         to="/derive"
-                        className="inline-flex items-center px-6 py-3 rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors"
+                        className="inline-flex items-center px-6 py-3 rounded-lg bg-primary-800  text-white hover:bg-primary-900 transition-colors"
                     >
                         <Wallet className="mr-2" size={20}/>
                         Derive Wallet

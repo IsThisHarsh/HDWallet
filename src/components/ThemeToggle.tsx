@@ -1,4 +1,3 @@
-import React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useWalletStore } from '../store/useWalletStore';
 import { cn } from '../lib/utils';
