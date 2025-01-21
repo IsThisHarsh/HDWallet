@@ -22,7 +22,7 @@ Welcome to the HDWallet project! This web-based hierarchical deterministic (HD) 
 ## Technologies Used
 
 - **Frontend**: Developed using modern web technologies to ensure responsiveness and compatibility across various devices.
-- **Backend**: Built with Node.js, leveraging WebSocket for efficient real-time communication.
+- **Backend**: Built with Node.js, leveraging http connection for efficient communication.
 
 ## Prerequisites
 
